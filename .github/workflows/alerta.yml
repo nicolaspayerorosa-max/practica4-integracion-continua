@@ -1,0 +1,23 @@
+name: Alerta DevOps
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notificar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ejecutar Hola Mundo
+        run: python hola.py
+
+      - name: Enviar notificacion
+        run: |
+          curl -H "Title: Nuevo Push" \
+               -H "Priority: default" \
+               -d "Se ha realizado un push a la rama main." \
+               https://ntfy.sh/devops-itla
